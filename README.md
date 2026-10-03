@@ -12,8 +12,9 @@ Watch the interface demo on YouTube:
 
 [![Watch the Hoseline interface demo on YouTube](https://img.youtube.com/vi/05-hRPGhAFA/hqdefault.jpg)](https://youtube.com/shorts/05-hRPGhAFA)
 
-The screenshots and local walkthrough use fictional sample callsigns and names.
-The local walkthrough is silent and shows search, favorites, and theme switching.
+The web dashboard screenshots and local walkthrough use fictional sample
+callsigns and names. The local walkthrough is silent and shows search,
+favorites, and theme switching.
 
 ![Hoseline dashboard in light theme](docs/media/dashboard-light.jpg)
 
@@ -88,6 +89,10 @@ available on your `PATH`. Then run:
 ```bash
 uv run --package bm-monitor python hoseline_player.py 91
 ```
+
+Console output from TG 91 (local data path redacted):
+
+![Console player showing TG 91 calls and phonetic callsigns](docs/media/console-player-redacted.png)
 
 The talkgroup defaults to 91 if omitted. The player reads the current Hoseline
 client token from its public page, joins that talkgroup through the `spotter`
