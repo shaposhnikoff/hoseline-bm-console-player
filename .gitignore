@@ -1,0 +1,17 @@
+# Downloaded reference data
+data/
+
+# Local credentials
+.env
+
+# Optional audio captures
+recordings/
+
+# Local Python environment and tooling caches
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.py[cod]
+.DS_Store

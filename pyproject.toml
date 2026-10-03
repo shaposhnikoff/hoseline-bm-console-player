@@ -1,0 +1,16 @@
+[project]
+name = "bm-monitor"
+version = "0.1.0"
+description = "BrandMeister Hoseline console player"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "msgpack>=1.1.0",
+    "python-socketio>=5.17.0",
+    "websocket-client>=1.9.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
