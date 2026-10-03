@@ -7,8 +7,12 @@ dashboard with active calls, filters, browser audio, and optional WAV recording.
 
 ## Interface preview
 
-These captures use fictional sample callsigns and names. The walkthrough is silent
-and shows search, favorites, and theme switching.
+Watch the interface demo on YouTube:
+
+[![Watch the Hoseline interface demo on YouTube](https://img.youtube.com/vi/05-hRPGhAFA/hqdefault.jpg)](https://youtube.com/shorts/05-hRPGhAFA)
+
+The screenshots and local walkthrough use fictional sample callsigns and names.
+The local walkthrough is silent and shows search, favorites, and theme switching.
 
 ![Hoseline dashboard in light theme](docs/media/dashboard-light.jpg)
 
