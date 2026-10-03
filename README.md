@@ -1,9 +1,79 @@
 # Hoseline BM Console Player
 
-Play a BrandMeister talkgroup in the terminal with `mpv`, display the active
-operator, and optionally save each call as a WAV file.
+Play a BrandMeister talkgroup in the terminal with `mpv` or use a local web
+dashboard with active calls, filters, browser audio, and optional WAV recording.
 
 [Hoseline playback flow diagram](https://github.com/shaposhnikoff/hoseline-bm-console-player/blob/main/docs/diagrams/hoseline-playback-flow.md)
+
+## Interface preview
+
+These captures use fictional sample callsigns and names. The walkthrough is silent
+and shows search, favorites, and theme switching.
+
+![Hoseline dashboard in light theme](docs/media/dashboard-light.jpg)
+
+[Dark theme screenshot](docs/media/dashboard-dark.jpg) ·
+[Player and profile icons](docs/media/player-profiles.jpg) ·
+[Watch the 14-second walkthrough (MP4)](docs/media/interface-walkthrough.mp4)
+
+## Local web dashboard in Docker
+
+The dashboard shows current and recently ended calls from BM Last Heard. You can
+filter by country or region inferred from the talkgroup prefix, search
+talkgroups or callsigns (including RegEx), save favorite groups, switch themes,
+and click a call card to listen. Add up to four talkgroups with **+ Add TG**;
+the player mixes their audio and shows the latest active callsign, name,
+location when available, and phonetic callsign. Links beside a known callsign
+open its QRZ.com and RadioID profiles in a new tab. Audio
+plays in the **browser on your computer**; the container does not need `mpv` or
+access to the host audio device.
+
+Start Docker Desktop, then build the image in the repository directory:
+
+```bash
+docker buildx build --load -t hoseline-bm-console-player:local .
+```
+
+Run the dashboard on your computer only:
+
+```bash
+mkdir -p recordings
+docker run --rm --name hoseline-local \
+  --user "$(id -u):$(id -g)" \
+  -p 127.0.0.1:8765:8765 \
+  --mount "type=bind,src=$PWD/recordings,dst=/app/recordings" \
+  hoseline-bm-console-player:local
+```
+
+Open [http://127.0.0.1:8765](http://127.0.0.1:8765), enter a talkgroup such
+as `91`, add any other talkgroups, and click **Listen**. A browser click is required before audio can
+start. Enable **Record calls to WAV** to save each call under `recordings/` on
+the host. The checkbox takes effect immediately, restarting the selected
+talkgroup connections if already listening. Recordings use the same per-call
+filename format as the terminal player. Stop with Ctrl+C in the Docker terminal
+or `docker stop hoseline-local` in another terminal.
+
+For full name, city, and country lookup, mount your local BM user export. The
+JSON file is intentionally excluded from the image:
+
+```bash
+docker run --rm --name hoseline-local \
+  --user "$(id -u):$(id -g)" \
+  -p 127.0.0.1:8765:8765 \
+  --mount "type=bind,src=$PWD/recordings,dst=/app/recordings" \
+  --mount "type=bind,src=$PWD/data/users.json,dst=/app/data/users.json,readonly" \
+  hoseline-bm-console-player:local
+```
+
+Create `recordings/` before either command; create `data/users.json` before
+using the second. Without that export, the dashboard uses available Last Heard
+callsign and name data, while location may be missing. The browser stores theme
+and favorite selections locally. Only the loopback port is published, so other
+computers cannot open this dashboard through the shown command.
+
+For development without Docker, run `uv run python hoseline_web.py` and open
+the same local URL. The web audio path is shown in
+[the dashboard flow diagram](docs/diagrams/hoseline-web-flow.md).
 
 ## Play Hoseline audio
 

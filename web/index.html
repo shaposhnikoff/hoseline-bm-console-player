@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#c34f32">
+    <title>Hoseline Local</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">◉</span><span>HOSELINE <strong>LOCAL</strong></span></div>
+      <div class="top-actions">
+        <span id="feed-state" class="feed-state">Connecting to Last Heard…</span>
+        <button id="theme-button" class="icon-button" type="button" aria-label="Switch theme" title="Switch theme">◐</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="intro" aria-label="Dashboard title">
+        <div>
+          <p class="eyebrow">BRANDMEISTER NETWORK</p>
+          <h1>Live talkgroups</h1>
+          <p class="subtitle">Follow active conversations and listen to a talkgroup from your browser.</p>
+        </div>
+        <div class="live-count"><span class="live-dot"></span><strong id="active-count">0</strong><span>active now</span></div>
+      </section>
+
+      <section class="player" aria-label="Audio player">
+        <div class="player-heading">
+          <div class="player-title"><span class="player-icon">♫</span><div><span class="eyebrow">AUDIO PLAYER</span><h2 id="player-title">Talkgroups 91</h2></div></div>
+          <span id="player-status" class="status-pill">Stopped</span>
+        </div>
+        <div class="player-controls">
+          <label class="field group-field" for="talkgroup">Talkgroup
+            <input id="talkgroup" type="number" min="91" max="99999999" value="91" inputmode="numeric">
+          </label>
+          <button id="add-group" class="add-button" type="button">+ Add TG</button>
+          <button id="play-button" class="play-button" type="button">▶ <span>Listen</span></button>
+          <label class="field volume-field" for="volume">Volume
+            <input id="volume" type="range" min="0" max="100" value="80">
+          </label>
+          <label class="record-control" for="record"><input id="record" type="checkbox"><span>Record calls to WAV</span></label>
+        </div>
+        <div id="selected-groups" class="selected-groups" aria-label="Selected talkgroups"></div>
+        <div class="now-speaking">
+          <div class="speaker-avatar">⌁</div>
+          <div class="speaker-text">
+            <span class="eyebrow">ON AIR</span>
+            <div class="speaker-headline">
+              <strong id="speaker-callsign">Waiting for a call</strong>
+              <span id="speaker-links" class="speaker-links" hidden>
+                <a id="speaker-qrz" target="_blank" rel="noopener noreferrer" title="QRZ.com">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4 4"/></svg>
+                </a>
+                <a id="speaker-radioid" target="_blank" rel="noopener noreferrer" title="RadioID">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.6-1.4 1.6-2 3-2s2.4.6 3 2m3-6h3m-3 3h3"/></svg>
+                </a>
+              </span>
+            </div>
+            <span id="speaker-details">Choose a talkgroup and press Listen</span>
+            <span id="speaker-phonetic" class="phonetic"></span>
+          </div>
+          <div id="audio-bars" class="audio-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </section>
+
+      <section class="board" aria-label="Active calls">
+        <div class="section-heading"><div><span class="eyebrow">LIVE ACTIVITY</span><h2>On the network</h2></div><span id="updated-at" class="updated-at">Waiting for updates</span></div>
+        <div class="filters">
+          <label class="field" for="country-filter">Show
+            <select id="country-filter"><option value="all">Everything</option></select>
+          </label>
+          <label class="field" for="group-filter">Talkgroup or callsign
+            <input id="group-filter" type="search" placeholder="Search live calls">
+          </label>
+          <label class="regex-control" for="regex"><input id="regex" type="checkbox"><span>RegEx mode</span></label>
+          <label class="favorites-control" for="favorites-only"><input id="favorites-only" type="checkbox"><span>Favorites only</span></label>
+        </div>
+        <p id="filter-error" class="filter-error" role="alert" hidden></p>
+        <div id="call-grid" class="call-grid" aria-live="polite"></div>
+        <p id="empty-state" class="empty-state" hidden>No calls match these filters.</p>
+      </section>
+    </main>
+    <footer>Local dashboard · Data and audio from <a href="https://hose.brandmeister.network/" target="_blank" rel="noopener noreferrer">BrandMeister Hoseline</a></footer>
+  </body>
+</html>
