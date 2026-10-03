@@ -1,7 +1,8 @@
-# Hoseline BM Console Player
+# Hoseline BM Web and Console Player
 
-Play a BrandMeister talkgroup in the terminal with `mpv` or use a local web
-dashboard with active calls, filters, browser audio, and optional WAV recording.
+Listen to BrandMeister talkgroups in a local web dashboard or in the terminal.
+The web player provides active calls, filters, browser audio, and optional WAV
+recording. The console player uses `mpv` for audio playback.
 
 [Hoseline playback flow diagram](https://github.com/shaposhnikoff/hoseline-bm-console-player/blob/main/docs/diagrams/hoseline-playback-flow.md)
 
@@ -79,9 +80,10 @@ For development without Docker, run `uv run python hoseline_web.py` and open
 the same local URL. The web audio path is shown in
 [the dashboard flow diagram](docs/diagrams/hoseline-web-flow.md).
 
-## Play Hoseline audio
+## Console player
 
-Install `mpv` so it is on your `PATH`, then run:
+**Dependency:** Install [`mpv`](https://mpv.io/) on the host and make sure it is
+available on your `PATH`. Then run:
 
 ```bash
 uv run --package bm-monitor python hoseline_player.py 91

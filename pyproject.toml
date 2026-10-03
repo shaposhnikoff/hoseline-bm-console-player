@@ -1,7 +1,7 @@
 [project]
 name = "bm-monitor"
 version = "0.1.0"
-description = "BrandMeister Hoseline console player"
+description = "BrandMeister Hoseline web and console player"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
